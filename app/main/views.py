@@ -1,9 +1,10 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from flask_login import login_required,current_user
-from ..models import User
-from .forms import UpdateProfile
+from ..models import Blog, User, Comment
+from .forms import UpdateProfile,CommentForm,BlogForm,SubscriptionForm
 from .. import db,photos
+import markdown2 
 
 @main.route('/')
 def index():
@@ -12,8 +13,75 @@ def index():
     '''
 
     title = 'Pesonal Blog'
+    blogs = Blog.get_blogs()
+    return render_template('index.html', title = title, blogs = blogs)
 
-    return render_template('index.html', title = title)
+@main.route('/blog/<int:id>')
+def blog(id):
+    '''
+    View blog page function that returns the blog details page and its data
+    '''
+    blog = Blog.query.get(id)
+    title = f'{blog.title}'
+    comments = Comment.query.filter_by(pitch_id = id).all()
+    return render_template('blog.html',title = title,blog = blog,comments = comments)
+
+@main.route('/blog/new/', methods = ['GET','POST'])
+@login_required
+def new_blog():
+    '''
+    Function that creates new pitches
+    '''
+    form = BlogForm()
+
+    if form.validate_on_submit():
+        title = form.title.data
+        text = form.text.data
+        new_blog= Blog(title = title, text = text, user = current_user)
+
+        new_blog.save_blog()
+        return redirect(url_for('.index'))
+    title = 'Create Blog'
+    return render_template('new_blog.html',title = title, blog_form = form)
+
+@main.route('/delete_blog/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_blog(id):
+    blog = Blog.query.get(id)
+
+    if blog is None:
+        abort(404)
+
+    db.session.delete(blog)
+    db.session.commit()
+    return redirect (url_for('main.index'))
+
+@main.route('/blog/comment/new/<int:id>', methods = ['GET','POST'])
+@login_required
+def new_comment(id):
+    form = CommentForm()
+    blog = Blog.query.get(id)
+
+    if form.validate_on_submit():
+        comment = form.comment.data
+        new_comment = Comment(blog_id=blog.id,comment = comment, user = current_user)
+        new_comment.save_comment()
+        return redirect(url_for('.blog',id = blog.id ))
+
+    title = f'{blog.title} comment'
+    return render_template('new_comment.html',title = title, comment_form=form, blog = blog)
+
+@main.route('/delete_comment/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_comment(id):
+    comment =Comment.query.get(id)
+
+    if comment is None:
+        abort(404)
+
+    db.session.delete(comment)
+    db.session.commit()
+    return redirect (url_for('.index'))
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -53,3 +121,22 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/comment/<int:id>')
+def single_comment(id):
+    comment = Comment.query.get(id)
+    if comment is None:
+        abort(404)
+    format_comment = markdown2.markdown(comment.comment,extras=["code-friendly", "fenced-code-blocks"])
+    return render_template('comment.html',comment = comment,format_comment = format_comment)
+
+@main.route('/single_blog/<int:id>')
+def single_blog(id):
+    blog = Blog.query.get(id)
+    if blog is None:
+        abort(404)
+    format_blog = markdown2.markdown(blog.text,extras=["code-friendly", "fenced-code-blocks"])
+    return render_template('single_blog.html',blog = blog,format_blog=format_blog)
+
+
+
