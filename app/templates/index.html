@@ -2,7 +2,7 @@
 
 {% block styles%}
     {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+    <link rel="stylesheet" type = "text/css" href="{{url_for('static',filename='css/index.css')}}">
 {% endblock %}
 
 {% block content %}
@@ -24,7 +24,9 @@
 
     <div class="col-md-4">
         <div class="panel panel-default">
-            <h4 class="panel-heading text-center header"><strong>{{blog.user.username}}</strong></h4>
+            <div class="panel-heading">
+                <h4><strong>{{blog.user.username}}</strong></h4>
+            </div>
             <div class="panel-body">
                 <p class="text-center"><em> posted on {{blog.posted.strftime("%b %d %Y")}}</em></p>
                 <hr>
@@ -34,7 +36,7 @@
             </div>
             <div class="panel-footer">
                 <span><a href="/blog/{{blog.id}}"><button class="btn btn-sm btn-success">View blog details</button></a></span>
-                <span><a href="{{url_for('main.update_blog',id = blog.id)}}"><button class="btn btn-sm btn-danger">Update</button></a></span>
+                <span><a href="{{url_for('main.update_blog',id = blog.id)}}"><button class="btn btn-sm btn-primary">Update</button></a></span>
                 <span><a href="{{url_for('main.delete_blog',id = blog.id)}}"><button class="btn btn-sm btn-danger">Delete</button></a></span>
             </div>
         </div>
@@ -46,8 +48,10 @@
     <div class="row">
         <h3>Quote:</h3>
         {%for quote in quotes%}
+        <div class="quotes">
             <p>{{quote.quote}}</p>
             <p>~{{quote.author}}~</p>
+        </div>
         {% endfor %}
     </div> 
 </div>
