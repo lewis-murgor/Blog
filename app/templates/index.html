@@ -1,5 +1,4 @@
 {% extends 'base.html'%}
-{% import 'macros.html' as macro%}
 
 {% block styles%}
     {{ super() }}
@@ -9,16 +8,47 @@
 {% block content %}
 
 <div class="container">
-    <h3 class="text-center">Blogs</h3>
+    <h3 class="blog text-center">Blogs</h3>
     <hr>
-    <div>
-        <a class="btn btn-primary text-center" href="/blog/new/"> Create A Blog</a>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-danger text-center" href="/blog/new/"> Create A Blog</a>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-success text-center" href="/subscribe/"> Subscribe</a>
+        </div>
     </div>
     <br>
-    <div class="blogs">
-        {{ macro.displayBlogs(blogs)}}
+
+    {%for blog in blogs%}
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <h4 class="panel-heading text-center header"><strong>{{blog.user.username}}</strong></h4>
+            <div class="panel-body">
+                <p class="text-center"><em> posted on {{blog.posted.strftime("%b %d %Y")}}</em></p>
+                <hr>
+                <h4 class="text-center"><strong>{{blog.title}}</strong></h4>
+                <hr>
+                {{blog.text}}
+            </div>
+            <div class="panel-footer">
+                <span><a href="/blog/{{blog.id}}"><button class="btn btn-sm btn-success">View blog details</button></a></span>
+                <span><a href="{{url_for('main.delete_blog',id = blog.id)}}"><button class="btn btn-sm btn-danger">Delete</button></a></span>
+            </div>
+        </div>
     </div>
-    
+    {% endfor %}
+      
+</div>
+<div class="container">
+    <div class="row">
+        <h3>Quote:</h3>
+        {%for quote in quotes%}
+            <p>{{quote.quote}}</p>
+            <p>~{{quote.author}}~</p>
+        {% endfor %}
+    </div> 
 </div>
 
 {% endblock %}
