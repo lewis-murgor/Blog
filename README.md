@@ -29,7 +29,7 @@ The live link of the project is
 ## Support and contact details
 You can contact me through the email kiplagatlewis29@gmail.com
 ### License
-You can check the licence [here]()
+You can check the licence [here](https://github.com/lewis-murgor/Blog/blob/master/Licence)
 ##
 Copyright (c) 2022 
 ##
