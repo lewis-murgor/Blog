@@ -19,6 +19,10 @@ class BlogForm(FlaskForm):
     text = TextAreaField('Blog')
     submit = SubmitField('Submit')
 
+class UpdateBlog(FlaskForm):
+    text = TextAreaField('Edit blog ')
+    submit = SubmitField('Update')
+
 class SubscriptionForm(FlaskForm):
 
     email = StringField('Your Email Address',validators=[InputRequired(),Email()])
