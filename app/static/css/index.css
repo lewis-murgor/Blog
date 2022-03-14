@@ -1,0 +1,17 @@
+.header {
+    background-color: black;
+    color: white;
+}
+.panel-body {
+    background-color: azure;
+}
+h3 {
+    color: darkgoldenrod;
+}
+body {
+    background-color: whitesmoke;
+}
+.blog {
+    text-align: center;
+    color: darkgoldenrod;
+}
