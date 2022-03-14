@@ -4,8 +4,14 @@
 {% block content %}
 <div class="container">
     <div class="col-md-8">
-        <h4>{{blog.title}}</h4>
-        {{blog.text}}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4 class="text-center">{{blog.title}}</h4>
+                <hr>
+                {{blog.text}}
+            </div>
+        </div>
+        
     </div>
     <div class="col-md-4">
         {{ wtf.quick_form(comment_form) }}
