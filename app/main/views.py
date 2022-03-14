@@ -3,7 +3,7 @@ from . import main
 from ..request import get_quotes
 from flask_login import login_required,current_user
 from ..models import Blog, User, Comment, Subscribe
-from .forms import UpdateProfile,CommentForm,BlogForm,SubscriptionForm
+from .forms import UpdateProfile,CommentForm,BlogForm,SubscriptionForm,UpdateBlog
 from .. import db,photos
 import markdown2 
 from ..email import mail_message
@@ -45,6 +45,19 @@ def new_blog():
         return redirect(url_for('.index'))
     title = 'Create Blog'
     return render_template('new_blog.html',title = title, blog_form = form)
+
+@main.route('/update_blog/<int:id>', methods=['GET','POST'])
+@login_required
+def update_blog(id):
+    form = UpdateBlog()
+  
+    if form.validate_on_submit():
+        blog = Blog.query.filter_by(id=id).first()
+        text=form.text.data
+        db.session.add(blog)
+        db.session.commit()
+        return redirect(url_for('main.index', id=id, text=text))
+    return render_template('update_blog.html', update_form=form)
 
 @main.route('/delete_blog/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -137,7 +150,7 @@ def single_blog(id):
     blog = Blog.query.get(id)
     if blog is None:
         abort(404)
-    format_blog = markdown2.markdown(blog.text,extras=["code-friendly", "fenced-code-blocks"])
+    format_blog = markdown2.markdown(blog.text,update_blog.text,extras=["code-friendly", "fenced-code-blocks"])
     return render_template('single_blog.html',blog = blog,format_blog=format_blog)
 
 @main.route('/subscribe/',methods=['GET','POST'])
