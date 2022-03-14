@@ -1,20 +1,22 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
+from ..request import get_quotes
 from flask_login import login_required,current_user
-from ..models import Blog, User, Comment
+from ..models import Blog, User, Comment, Subscribe
 from .forms import UpdateProfile,CommentForm,BlogForm,SubscriptionForm
 from .. import db,photos
 import markdown2 
+from ..email import mail_message
 
 @main.route('/')
 def index():
     '''
     View root page function that returns the index page and its data
     '''
-
+    quotes = get_quotes()
     title = 'Pesonal Blog'
     blogs = Blog.get_blogs()
-    return render_template('index.html', title = title, blogs = blogs)
+    return render_template('index.html', title = title, blogs = blogs, quotes = quotes)
 
 @main.route('/blog/<int:id>')
 def blog(id):
@@ -23,7 +25,7 @@ def blog(id):
     '''
     blog = Blog.query.get(id)
     title = f'{blog.title}'
-    comments = Comment.query.filter_by(pitch_id = id).all()
+    comments = Comment.query.filter_by(blog_id = id).all()
     return render_template('blog.html',title = title,blog = blog,comments = comments)
 
 @main.route('/blog/new/', methods = ['GET','POST'])
@@ -137,6 +139,22 @@ def single_blog(id):
         abort(404)
     format_blog = markdown2.markdown(blog.text,extras=["code-friendly", "fenced-code-blocks"])
     return render_template('single_blog.html',blog = blog,format_blog=format_blog)
+
+@main.route('/subscribe/',methods=['GET','POST'])
+@login_required
+def subscribe():
+
+    form = SubscriptionForm()
+    
+    if form.validate_on_submit():
+        subscriber = Subscribe(email = form.email.data)
+
+        db.session.add(subscriber)
+        db.session.commit()
+
+        mail_message("You have successfully subscribed to new blogs notifications", "email/subscribe_user", subscriber.email,subscriber=subscriber)
+        return redirect(url_for('main.index'))
+    return render_template('subscribe.html',subscription_form = form)
 
 
 
