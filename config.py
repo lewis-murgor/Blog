@@ -1,5 +1,4 @@
 import os
-import re
 
 class Config:
     '''
@@ -29,9 +28,8 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-    if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
-        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
+    SQLALCHEMY_DATABASE_URI = 'postgresql://jizvbyhpykdhne:6b5170164e6944e8ea248a4de6d62bb5d93ba8c64fd9c5c3efc8696c68e69ee0@ec2-3-209-61-239.compute-1.amazonaws.com:5432/d8aalgi510qere'
+    
 
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lewis:lewis29@localhost/blog_test'
