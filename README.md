@@ -18,7 +18,7 @@ This is an websites that displays my personal blogs and allows a user to create 
 The application has no known bugs.
 
 ## Live Site
-The live link of the project is  
+The live link of the project is  https://blog-lewis.herokuapp.com/
 
 ## Technologies Used
 * Python
