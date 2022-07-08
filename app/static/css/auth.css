@@ -1,0 +1,14 @@
+.login {
+    margin-top: 10%;
+}
+h1 {
+    text-align: center;
+    font-family: Cookie;
+}
+.authentication {
+    background-color: #0D1B2A;
+    color: white;
+}
+body {
+    background-color: #0D1B2A;
+}
