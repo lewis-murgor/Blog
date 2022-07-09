@@ -27,7 +27,7 @@
             <div class="panel-heading">
                 <h4><strong>{{blog.user.username}}</strong></h4>
             </div>
-            <div class="panel-body">
+            <div class="panel-body text">
                 <p class="text-center"><em> posted on {{blog.posted.strftime("%b %d %Y")}}</em></p>
                 <hr>
                 <h4 class="text-center"><strong>{{blog.title}}</strong></h4>
@@ -45,15 +45,21 @@
       
 </div>
 <div class="container">
+    <h3>Quote:</h3>
     <div class="row">
-        <h3>Quote:</h3>
-        {%for quote in quotes%}
-        <div class="quotes">
-            <p>{{quote.quote}}</p>
-            <p>~{{quote.author}}~</p>
+        <div class="col-md-4">
+            {%for quote in quotes%}
+            <div class="quotes">
+                <div class="panel panel-default">
+                    <div class="panel-body quote">
+                        <p>{{quote.quote}}</p>
+                        <p>~{{quote.author}}~</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div> 
+    </div>
 </div>
 
 {% endblock %}

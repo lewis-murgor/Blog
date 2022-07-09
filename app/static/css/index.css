@@ -2,15 +2,15 @@
     color: white;
     text-align: center;
 }
-.panel-body {
-    background-color:black;
+.text {
+    background-color:#0D1B2A;
     color: white;
 }
 h3 {
     color: darkgoldenrod;
 }
 body {
-    background-color: black;
+    background-color: #152230;
 }
 .blog {
     text-align: center;
@@ -21,4 +21,7 @@ body {
 }
 .quotes {
     color: white;
+}
+.quote {
+    background-color: #152230;
 }
