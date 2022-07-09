@@ -7,7 +7,18 @@
 
 {% block content %}
 
-<div class="container">
+<div class="blogs">
+    <div class="wizard">
+        <h1>
+            What is on 
+            <br>
+            your mind?
+        </h1>
+        <h5>Impossible is Nothing</h5>
+        <div class="create"><a href="/blog/new/"><button type="submit">Create a Blog</button></a></div>
+    </div>
+</div>
+
     <h3 class="blog text-center">Blogs</h3>
     <hr>
     <div class="row">
@@ -60,6 +71,5 @@
             {% endfor %}
         </div>
     </div>
-</div>
 
 {% endblock %}
