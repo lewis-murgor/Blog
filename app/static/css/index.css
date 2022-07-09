@@ -32,7 +32,7 @@ body {
     color: white; 
 }
 .wizard {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 110px);
     background-image: url('https://cdn.searchenginejournal.com/wp-content/uploads/2020/08/7-ways-a-blog-can-help-your-business-right-now-5f3c06b9eb24e-1280x720.png');
     background-size: cover;
     background-position: center;
