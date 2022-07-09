@@ -2,8 +2,8 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..request import get_quotes
 from flask_login import login_required,current_user
-from ..models import Blog, User, Comment, Subscribe
-from .forms import UpdateProfile,CommentForm,BlogForm,SubscriptionForm,UpdateBlog
+from ..models import Blog, User, Comment
+from .forms import UpdateProfile,CommentForm,BlogForm,UpdateBlog
 from .. import db,photos
 import markdown2 
 from ..email import mail_message
@@ -152,22 +152,6 @@ def single_blog(id):
         abort(404)
     format_blog = markdown2.markdown(blog.text,update_blog.text,extras=["code-friendly", "fenced-code-blocks"])
     return render_template('single_blog.html',blog = blog,format_blog=format_blog)
-
-@main.route('/subscribe/',methods=['GET','POST'])
-@login_required
-def subscribe():
-
-    form = SubscriptionForm()
-    
-    if form.validate_on_submit():
-        subscriber = Subscribe(email = form.email.data)
-
-        db.session.add(subscriber)
-        db.session.commit()
-
-        mail_message("You have successfully subscribed to new blogs notifications", "email/subscribe_user", subscriber.email,subscriber=subscriber)
-        return redirect(url_for('main.index'))
-    return render_template('subscribe.html',subscription_form = form)
 
 
 
