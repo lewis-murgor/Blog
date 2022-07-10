@@ -2,7 +2,7 @@
 
 {% block styles%}
     {{ super() }}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Shadows Into Light">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Shadows Into Light|Edu NSW ACT Foundation">
     <link rel="stylesheet" type = "text/css" href="{{url_for('static',filename='css/index.css')}}">
 {% endblock %}
 
@@ -10,18 +10,19 @@
 
 <div class="blogs">
     <div class="wizard">
-        <br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
         {%for quote in quotes%}
         <div class="quotes">
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
+                    <h3>Quote:</h3>
                     <h4>{{quote.quote}}</h4>
                     <h5>~{{quote.author}}~</h5>
                 </div>
                 <div class="col-md-3"></div>
             </div>
-            <br><br><br><br><br><br><br>
+            <br><br><br><br><br><br>
             <a class="create" href="/blog/new/"><button>Create a Blog</button></a>
         </div>
         {% endfor %}
