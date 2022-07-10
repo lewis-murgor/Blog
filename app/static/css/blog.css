@@ -1,0 +1,19 @@
+body {
+    background-color: #152230;
+}
+.new-blog {
+    margin-top: 20%;
+}
+.blog {
+    width: 100%;
+    height: 100vh;
+}
+.single-blog {
+    height: calc(100vh - 45px);
+    background-image: url('https://image.shutterstock.com/image-photo/blog-information-website-concept-workplace-260nw-1189626925.jpg');
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+    align-items: center;
+}
+

@@ -24,19 +24,21 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4><strong>{{blog.user.username}}</strong></h4>
+                <h4 class="text-center"><strong>{{blog.title}}</strong></h4>
             </div>
             <div class="panel-body text">
-                <p class="text-center"><em> posted on {{blog.posted.strftime("%b %d %Y")}}</em></p>
-                <hr>
-                <h4 class="text-center"><strong>{{blog.title}}</strong></h4>
-                <hr>
                 {{blog.text}}
             </div>
             <div class="panel-footer">
-                <span><a href="/blog/{{blog.id}}"><button class="btn btn-sm btn-success">View blog details</button></a></span>
-                <span><a href="{{url_for('main.update_blog',id = blog.id)}}"><button class="btn btn-sm btn-primary">Update</button></a></span>
-                <span><a href="{{url_for('main.delete_blog',id = blog.id)}}"><button class="btn btn-sm btn-danger">Delete</button></a></span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>By <strong>{{blog.user.username}}</strong></p>
+                    </div>
+                    <div class="col-md-6">
+                        <span><a href="/blog/{{blog.id}}"><button>Blog</button></a></span>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
