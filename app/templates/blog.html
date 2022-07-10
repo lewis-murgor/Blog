@@ -3,7 +3,8 @@
 
 {% block styles%}
     {{ super() }}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Shadows Into Light">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Shadows Into Light|Edu NSW ACT Foundation">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" type = "text/css" href="{{url_for('static',filename='css/blog.css')}}">
 {% endblock %}
 
@@ -18,10 +19,19 @@
                 <h3 class="text-center">{{blog.title}}</h3>
                 <h5>By:<em>{{blog.user.username}}</em></h5>
                 <p>{{blog.text}}</p>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <a href="/blog/comment/new/{{blog.id}}"><i class="fa fa-comment" style="font-size:40px;" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/delete_blog/{{blog.id}}"><i class="fa fa-trash" style="font-size:40px;" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
             </div>
             <div class="col-md-3"></div>
         </div>
-        
     </div>
 </div>
     
