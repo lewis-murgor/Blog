@@ -18,9 +18,6 @@ body {
 .panel-footer {
     background-color: white;
 }
-.quotes {
-    color: white;
-}
 .quote {
     background-color: #152230;
 }
@@ -28,14 +25,13 @@ body {
     width: 100%;
     height: 100vh;
     background-color: #152230;
-    color: white; 
+    color: black;
 }
 .wizard {
     height: calc(100vh - 50px);
     background-image: url('https://cdn.searchenginejournal.com/wp-content/uploads/2020/08/7-ways-a-blog-can-help-your-business-right-now-5f3c06b9eb24e-1280x720.png');
     background-size: cover;
     background-position: center;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
