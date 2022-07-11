@@ -10,7 +10,7 @@ body {
     color: black;
 }
 .single-blog {
-    height: calc(100vh - 40px);
+    height: 100vh;
     background-image: url('https://image.shutterstock.com/image-photo/blog-information-website-concept-workplace-260nw-1189626925.jpg');
     background-size: cover;
     background-position: center;
@@ -25,5 +25,12 @@ h3 {
 }
 .comment {
     color: white;
+}
+button {
+    background-color: #152230;
+    color: white;
+}
+.style {
+    font-family: Kalam;
 }
 
