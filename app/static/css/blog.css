@@ -10,7 +10,7 @@ body {
     color: black;
 }
 .single-blog {
-    height: calc(100vh - 45px);
+    height: calc(100vh - 40px);
     background-image: url('https://image.shutterstock.com/image-photo/blog-information-website-concept-workplace-260nw-1189626925.jpg');
     background-size: cover;
     background-position: center;
@@ -22,5 +22,8 @@ body {
 }
 h3 {
     font-family: Edu NSW ACT Foundation;
+}
+.comment {
+    color: white;
 }
 
