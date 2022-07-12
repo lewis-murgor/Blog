@@ -6,7 +6,6 @@ from ..models import Blog, User, Comment
 from .forms import UpdateProfile,CommentForm,BlogForm,UpdateBlog
 from .. import db,photos
 import markdown2 
-from ..email import mail_message
 
 @main.route('/')
 def index():
