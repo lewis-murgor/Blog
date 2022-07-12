@@ -28,12 +28,12 @@
         {% endfor %}
     </div>
 </div>
-<div class="container">
-    <h2 class="blog">All Blogs</h2>
+<div class="container-fluid">
+    <h2 class="blog">Blogs</h2>
     {%for blog in blogs%}
     <div class="col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading title">
                 <h4 class="text-center"><strong>{{blog.title}}</strong></h4>
             </div>
             <div class="panel-body text">
@@ -42,10 +42,11 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>By <strong>{{blog.user.username}}</strong></p>
+                        <p>By <em>{{blog.user.username}}</em></p>
+                        <p>Posted on <em>{{blog.posted.strftime("%d %b %Y. %H:%M ")}}</em></p>
                     </div>
                     <div class="col-md-6">
-                        <span><a href="/blog/{{blog.id}}"><button>Blog</button></a></span>
+                        <span><a href="/blog/{{blog.id}}"><button class="details">Blog</button></a></span>
                     </div>
                 </div>
                 

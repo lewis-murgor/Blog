@@ -13,7 +13,8 @@ body {
     background-color: #152230;
 }
 .blog {
-    color: darkgoldenrod;
+    color: white;
+    text-align: center;
 }
 .panel-footer {
     background-color: white;
@@ -46,4 +47,7 @@ button {
 }
 .blog-wizard {
     font-family: Shadows Into Light;
+}
+.details {
+    float: right;
 }
